@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Петрова Д.А</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="src/js/button.js"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
     <div class="max-w-4xl mx-auto p-6">
@@ -34,6 +35,14 @@
                     >
                 </div>
                 <p class="text-xl font-medium text-gray-700">Петрова Д.А</p>
+            </div>
+        </div>
+        <div class="text-center mt-8">
+            <button id="toggleButton" class="bg-blue-500 text-white py-2 px-4 rounded shadow-md hover:bg-blue-600">
+                Показать картинку
+            </button>
+            <div class="mt-4">
+                <img id="image" src="src/img/smile.png" alt="Пример" class="hidden mx-auto rounded w-32 h-32">
             </div>
         </div>
     </div>
