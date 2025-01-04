@@ -7,12 +7,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-50 text-gray-800 font-sans">
-    <div>
+    <div class="text-center mb-8">
         <h1 class="text-4xl font-bold text-blue-700">Авторизуйтесь!</h1>
         <?php
         if (!isset($_COOKIE['User'])) {
         ?>
-        <a href="/registration.php">Зарегистрируйтесь</a> или <a href="/login.php">войдите</a>, чтобы просматривать контент!
+        <a class="text-bold text-blue-700" href="/registration.php">Зарегистрируйтесь</a> или <a class="text-bold text-blue-700" href="/login.php">войдите</a>, чтобы просматривать контент!
         <?php
             } else {
                 // подключение к БД
