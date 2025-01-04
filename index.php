@@ -12,7 +12,7 @@
         <?php
         if (!isset($_COOKIE['User'])) {
         ?>
-        <a class="text-bold text-blue-700" href="/registration.php">Зарегистрируйтесь</a> или <a class="text-bold text-blue-700" href="/login.php">войдите</a>, чтобы просматривать контент!
+        <a class="text-bold text-blue-700" href="registration.php">Зарегистрируйтесь</a> или <a class="text-bold text-blue-700" href="login.php">войдите</a>, чтобы просматривать контент!
         <?php
             } else {
                 // подключение к БД
