@@ -7,10 +7,10 @@ $dbName = "db";
 $link = mysqli_connect($servername, $username, $password);
 
 if (!$link) {
-    die("Ошибка подключения: " . mysqli_connection_error());
+    die("Ошибка подключения: " . mysqli_connect_error());
 }
 
-$sql = "CREATE DATABASE IF NOT EXIST $dbName";
+$sql = "CREATE DATABASE IF NOT EXISTS $dbName";
 
 if (!mysqli_query($link, $sql)) {
     echo "Не удалось создать БД";
@@ -28,7 +28,7 @@ $sql = "CREATE TABLE IF NOT EXISTS users(
   password VARCHAR(20) NOT NULL
 )";
 
-if(!mysqli_qyery($link, $sql)) {
+if(!mysqli_query($link, $sql)) {
     echo "Не удалось создать таблицу Users";
 }
 
