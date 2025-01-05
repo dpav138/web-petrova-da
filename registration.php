@@ -38,6 +38,10 @@
 </body>
 </html>
 <?php
+if (isset($_COOKIE['User'])) {
+    header("Location: profile.php");
+}
+
 require_once('db.php');
 
 $link = mysqli_connect('127.0.0.1', 'root', 'root', 'db');
