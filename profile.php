@@ -50,7 +50,7 @@
 <div class="flex items-center justify-center">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h1 class="text-3xl font-bold text-center text-blue-700 mb-6">Привет, <?php echo $_COOKIE['User']; ?></h1>
-        <form method="POST" action="profile.php" class="space-y-4">
+        <form method="POST" action="profile.php" enctype="multipart/form-data" name="upload" class="space-y-4">
             <div>
                 <label for="title" class="block text-sm font-medium text-gray-700">Заголовок вашего поста</label>
                 <input type="text" id="title" name="title" required
@@ -62,6 +62,7 @@
                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                     </textarea>
             </div>
+            <input type="file" name="file" /><br>
             <div>
                 <button type="submit" name="submit"
                         class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
@@ -83,7 +84,25 @@ if (isset($_POST['submit'])) {
 
     if (!$title || !$main_text) die ("Заполните все поля");
 
-    $sql = "INSERT INTO posts (title, main_text) VALUES ('$title', '$main_text')";
+    $image_name = null;
+    if(!empty($_FILES["file"]))
+    {
+        if (((@$_FILES["file"]["type"] == "image/gif") || (@$_FILES["file"]["type"] == "image/jpeg")
+            || (@$_FILES["file"]["type"] == "image/jpg") || (@$_FILES["file"]["type"] == "image/pjpeg")
+            || (@$_FILES["file"]["type"] == "image/x-png") || (@$_FILES["file"]["type"] == "image/png"))
+            && (@$_FILES["file"]["size"] < 102400))
+        {
+            move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $_FILES["file"]["name"]);
+            echo "Load in:  " . "upload/" . $_FILES["file"]["name"];
+            $image_name = $_FILES["file"]["name"];
+        }
+        else
+        {
+            echo "upload failed!";
+        }
+    }
+
+    $sql = "INSERT INTO posts (title, main_text) VALUES ('$title', '$main_text', '$image_name')";
     if (!mysqli_query($link, $sql)) die ("Не удалось добавить пост");
 }
 ?>

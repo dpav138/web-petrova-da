@@ -8,6 +8,7 @@ $res = mysqli_query($link, $sql);
 $rows = mysqli_fetch_array($res);
 $title = $rows['title'];
 $main_text = $rows['main_text'];
+$image_name = $rows['image_name']
 
 ?>
 
@@ -25,6 +26,9 @@ $main_text = $rows['main_text'];
             <?php echo $title ?>
         </h1>
         <?php echo $main_text ?>
+        <div class="mt-4">
+            <img id="image" src="/upload/<?php echo $image_name?>" alt="Пример" class="hidden mx-auto rounded w-32 h-32">
+        </div>
     </div>
 </body>
 </html>

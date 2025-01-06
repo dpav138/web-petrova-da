@@ -22,7 +22,7 @@
 
                 if (mysqli_num_rows($res) >  0) {
                     while ($post = mysqli_fetch_array($res)) {
-                        echo "<a href='posts.php?id=" . $post["id"] . "'>" . $post['title'] . "</a>\n";
+                        echo "<a href='posts.php?id=" . $post["id"] . "'>" . $post['title'] . "</a><br>";
                     }
                 } else {
                     echo "Записей пока нет";
