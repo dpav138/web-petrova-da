@@ -102,7 +102,7 @@ if (isset($_POST['submit'])) {
         }
     }
 
-    $sql = "INSERT INTO posts (title, main_text) VALUES ('$title', '$main_text', '$image_name')";
+    $sql = "INSERT INTO posts (title, main_text, image_name) VALUES ('$title', '$main_text', '$image_name')";
     if (!mysqli_query($link, $sql)) die ("Не удалось добавить пост");
 }
 ?>
