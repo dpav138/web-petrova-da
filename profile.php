@@ -92,7 +92,7 @@ if (isset($_POST['submit'])) {
             || (@$_FILES["file"]["type"] == "image/x-png") || (@$_FILES["file"]["type"] == "image/png"))
             && (@$_FILES["file"]["size"] < 102400))
         {
-            move_uploaded_file($_FILES["file"]["tmp_name"], "/upload/" . $_FILES["file"]["name"]);
+            move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $_FILES["file"]["name"]);
             echo "Load in:  " . "upload/" . $_FILES["file"]["name"];
             $image_name = $_FILES["file"]["name"];
         }
