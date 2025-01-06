@@ -57,5 +57,6 @@ if (isset($_POST['submit'])) {
     if(!mysqli_query($link, $sql)) {
         echo "Не удалось добавить пользователя";
     }
+    mysqli_close($link);
 }
 ?>

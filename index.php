@@ -28,6 +28,7 @@
                     echo "Записей пока нет";
                 }
             }
+            mysqli_close($link);
         ?>
     </div>
 </body>

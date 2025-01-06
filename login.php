@@ -55,5 +55,6 @@ if (isset($_POST['submit'])) {
     } else {
         echo "не правильное имя или пароль";
     }
+    mysqli_close($link);
 }
 ?>

@@ -92,7 +92,7 @@ if (isset($_POST['submit'])) {
             || (@$_FILES["file"]["type"] == "image/x-png") || (@$_FILES["file"]["type"] == "image/png"))
             && (@$_FILES["file"]["size"] < 102400))
         {
-            move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $_FILES["file"]["name"]);
+            move_uploaded_file($_FILES["file"]["tmp_name"], "/upload/" . $_FILES["file"]["name"]);
             echo "Load in:  " . "upload/" . $_FILES["file"]["name"];
             $image_name = $_FILES["file"]["name"];
         }
@@ -104,5 +104,6 @@ if (isset($_POST['submit'])) {
 
     $sql = "INSERT INTO posts (title, main_text, image_name) VALUES ('$title', '$main_text', '$image_name')";
     if (!mysqli_query($link, $sql)) die ("Не удалось добавить пост");
+    mysqli_close($link);
 }
 ?>
