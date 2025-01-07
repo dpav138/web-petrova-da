@@ -1,8 +1,8 @@
 <?php
-$servername = "127.0.0.1";
-$username = "root";
-$password = "root";
-$dbName = "db";
+$servername = getenv('DB_HOST');
+$username = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
+$dbName = getenv('DB_DATABASE');
 
 $link = mysqli_connect($servername, $username, $password);
 

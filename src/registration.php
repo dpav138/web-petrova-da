@@ -9,8 +9,13 @@
 <body class="bg-gray-50 text-gray-800 font-sans">
 <div class="flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 class="text-3xl font-bold text-center text-blue-700 mb-6">Войти</h1>
-        <form method="POST" action="login.php" class="space-y-4">
+        <h1 class="text-3xl font-bold text-center text-blue-700 mb-6">Регистрация</h1>
+        <form method="POST" action="registration.php" class="space-y-4">
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <input type="email" id="email" name="email" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
             <div>
                 <label for="username" class="block text-sm font-medium text-gray-700">Логин</label>
                 <input type="text" id="username" name="username" required
@@ -39,21 +44,24 @@ if (isset($_COOKIE['User'])) {
 
 require_once('db.php');
 
-$link = mysqli_connect('127.0.0.1', 'root', 'root', 'db');
+$servername = getenv('DB_HOST');
+$username = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
+$dbName = getenv('DB_DATABASE');
+
+$link = mysqli_connect($servername, $username, $password, $dbName);
+
 if (isset($_POST['submit'])) {
+    $email = $_POST['email'];
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if ( !$username || !$password) die ('Пожалуйста введите все значения!');
+    if (!$email || !$username || !$password) die ('Пожалуйста введите все значения!');
 
-    $sql = "SELECT * FROM users WHERE username='$username' AND password='$password' LIMIT 1";
+    $sql = "INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$password')";
 
-    $result = mysqli_query($link, $sql);
-    if (mysqli_num_rows($result) == 1) {
-        setcookie("User", $username, time()+7200);
-        header('Location: profile.php');
-    } else {
-        echo "не правильное имя или пароль";
+    if(!mysqli_query($link, $sql)) {
+        echo "Не удалось добавить пользователя";
     }
     mysqli_close($link);
 }

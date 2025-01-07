@@ -1,5 +1,11 @@
 <?php
-$link = mysqli_connect('127.0.0.1', 'root', 'root', 'db');
+$servername = getenv('DB_HOST');
+$username = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
+$dbName = getenv('DB_DATABASE');
+
+$link = mysqli_connect($servername, $username, $password, $dbName);
+
 $id = $_GET['id'];
 
 $sql = "SELECT * FROM posts WHERE id=$id";

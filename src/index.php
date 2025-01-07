@@ -15,7 +15,12 @@
         <a class="text-bold text-blue-700" href="registration.php">Зарегистрируйтесь</a> или <a class="text-bold text-blue-700" href="login.php">войдите</a>, чтобы просматривать контент!
         <?php
             } else {
-                $link = mysqli_connect('127.0.0.1', 'root', 'root', 'db');
+                $servername = getenv('DB_HOST');
+                $username = getenv('DB_USER');
+                $password = getenv('DB_PASSWORD');
+                $dbName = getenv('DB_DATABASE');
+
+                $link = mysqli_connect($servername, $username, $password, $dbName);
 
                 $sql = "SELECT * FROM posts";
                 $res = mysqli_query($link, $sql);

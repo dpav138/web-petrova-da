@@ -1,0 +1,40 @@
+services:
+  web:
+    build:
+      dockerfile: Dockerfile
+    env_file:
+      - .env.web
+    ports:
+      - "80:80"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      app_network:
+        ipv4_address: 10.10.0.2
+
+  db:
+    hostname: db
+    image: mariadb:11.7.1-ubi9-rc
+    env_file:
+      - .env.db
+    volumes:
+      - ./docker/mariadb:/var/lib/mysql
+      - ./logs/mariadb:/var/log/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "--silent" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    ports:
+      - "3306:3306"
+    networks:
+      app_network:
+        ipv4_address: 10.10.0.3
+
+networks:
+  app_network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.10.0.0/16
